@@ -233,6 +233,7 @@ resources:
           firewall:
             tcp: [80]
         run_list: ["recipe[apt]",
+                   "recipe[rax-drupal-dir]",
                    "recipe[drupal]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
