@@ -29,7 +29,7 @@ the `-P` flag to specify a custom parameter.
 
 * `server_hostname`: Hostname to use for the server that's built. (Default:
   Drupal)
-* `username`: Username for the Drupal admin login (Default: drupal)
+* `username`: Username for the Drupal admin login (Default: admin)
 * `domain`: Domain to be used with the Drupal site (Default: example.com)
 * `image`: Required: Server image used for all servers that are created as a
   part of this deployment. (Default: Ubuntu 12.04 LTS (Precise Pangolin))
@@ -50,6 +50,7 @@ Use `heat output-show <OUTPUT NAME>` to get the value of a specific output.
 * `private_key`: SSH Private Key
 * `drupal_password`: Drupal Password
 * `server_ip`: Server IP
+* `drupal_url`: Drupal URL
 * `drupal_user`: Drupal User
 
 For multi-line values, the response will come in an escaped form. To get rid of

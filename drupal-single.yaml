@@ -112,7 +112,7 @@ parameters:
     label: Username
     description: "Username for the Drupal admin login"
     type: string
-    default: drupal
+    default: admin
     constraints:
     - allowed_pattern: "^(.){1,16}$"
       description: |
@@ -239,6 +239,14 @@ outputs:
   server_ip:
     description: Server IP
     value: { get_attr: [drupal_server, accessIPv4] }
+
+  drupal_url:
+    description: Drupal URL
+    value:
+      str_replace:
+        template: "http://%ip%"
+        params:
+          "%ip%": { get_attr: [drupal_server, accessIPv4] }
 
   drupal_user:
     description: Drupal User
