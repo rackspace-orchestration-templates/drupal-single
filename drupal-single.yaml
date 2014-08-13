@@ -34,7 +34,7 @@ parameters:
     label: Server Name
     description: Hostname to use for the server that's built.
     type: string
-    default: Drupal 
+    default: Drupal
     constraints:
     - length:
         min: 1
@@ -97,7 +97,7 @@ parameters:
     default: "7.31"
     constraints:
     - allowed_values:
-      - "7.31",
+      - "7.31"
       - "6.33"
 
   # Database and system user configuration
@@ -144,7 +144,7 @@ parameters:
     label: Chef Version
     description: Version of chef client to use
     type: string
-    default: 11.12.8
+    default: 11.14.2
 
 resources:
   # Random password generation
@@ -237,7 +237,6 @@ resources:
       chef_version: { get_param: chef_version }
       node:
         apache:
-          listen_ports: [8080]
           timeout: 30
           serversignature: "Off"
           traceenable: "Off"
@@ -248,12 +247,7 @@ resources:
               user: "root"
               host: "localhost"
               password: { get_attr: [mysql_root_password, value] }
-        monit:
-          notify_email: 'root@localhost'
-          mail_format:
-            from: 'monit@localhost'
         mysql:
-          bind_address: "127.0.0.1"
           server_root_password: { get_attr: [mysql_root_password, value] }
           server_repl_password: { get_attr: [mysql_repl_password, value] }
           server_debian_password: { get_attr: [mysql_debian_password, value] }
@@ -261,7 +255,6 @@ resources:
           remove_anonymous_users: true
         drupal:
           version: { get_param: version }
-          server_aliases: [{ get_param: domain }]
           dir:
             str_replace:
               template: "/var/www/vhosts/%domain%"
@@ -272,31 +265,19 @@ resources:
             user: { get_param: username }
             pass: { get_attr: [database_password, value] }
             host: "127.0.0.1"
-          keys:
-            auth: { get_attr: [drupal_auth, value] }
-            logged_in: { get_attr: [drupal_logged_in, value] }
-            nonce_key: { get_attr: [drupal_nonce, value] }
-            secure_auth_key: { get_attr: [drupal_secure_auth, value] }
+          admin: { get_param: username }
+          pass: { get_attr: [database_password, value] }
         rax:
-          apache:
-            domain: { get_param: domain }
-          drupal:
-            admin_user: { get_param: username }
-            admin_pass: { get_attr: [database_password, value] }
+          firewall:
+            tcp: [80]
         run_list: ["recipe[apt]",
-                   "recipe[build-essential]",
-                   "recipe[rax-drupal::apache-prep]",
-                   "recipe[mysql::server]",
-                   "recipe[rax-drupal::mysql]",
+                   "recipe[drupal]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
                    "recipe[hollandbackup::main]",
                    "recipe[hollandbackup::backupsets]",
                    "recipe[hollandbackup::cron]",
-                   "recipe[php]",
-                   "recipe[drupal]",
-                   "recipe[rax-drupal::apache]",
-                   "recipe[rax-drupal::firewall]",
+                   "recipe[rax-firewall]"]
 
 outputs:
   private_key:
@@ -318,4 +299,3 @@ outputs:
   mysql_root_password:
     description: MySQL Root Password
     value: { get_attr: [mysql_root_password, value] }
-
