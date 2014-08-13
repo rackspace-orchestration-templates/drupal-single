@@ -256,7 +256,7 @@ outputs:
     value: { get_param: username }
 
   drupal_password:
-    description: Dupal Password
+    description: Drupal Password
     value: { get_attr: [database_password, value] }
 
   mysql_root_password:

@@ -49,7 +49,7 @@ Use `heat output-show <OUTPUT NAME>` to get the value of a specific output.
 
 * `mysql_root_password`: MySQL Root Password
 * `private_key`: SSH Private Key
-* `drupal_password`: Dupal Password
+* `drupal_password`: Drupal Password
 * `server_ip`: Server IP
 * `drupal_user`: Drupal User
 
