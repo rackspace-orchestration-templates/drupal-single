@@ -29,8 +29,8 @@ the `-P` flag to specify a custom parameter.
 
 * `server_hostname`: Hostname to use for the server that's built. (Default:
   Drupal)
-* `username`: Username for Drupal admin login (Default: drupal)
-* `domain`: Domain to be used with Drupal site (Default: example.com)
+* `username`: Username for the Drupal admin login (Default: drupal)
+* `domain`: Domain to be used with the Drupal site (Default: example.com)
 * `image`: Required: Server image used for all servers that are created as a
   part of this deployment. (Default: Ubuntu 12.04 LTS (Precise Pangolin))
 * `version`: Version of Drupal to install (Default: 7.31)

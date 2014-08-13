@@ -18,6 +18,7 @@ parameter_groups:
 - label: rax-dev-params
   parameters:
   - server_hostname
+  - database_name
   - kitchen
   - chef_version
   - version
@@ -78,7 +79,7 @@ parameters:
   # Durpal settings
   domain:
     label: Site Domain
-    description: Domain to be used with Drupal site
+    description: Domain to be used with the Drupal site
     type: string
     default: "example.com"
     constraints:
@@ -109,7 +110,7 @@ parameters:
 
   username:
     label: Username
-    description: "Username for Drupal admin login"
+    description: "Username for the Drupal admin login"
     type: string
     default: drupal
     constraints:
