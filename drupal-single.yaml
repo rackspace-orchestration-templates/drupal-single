@@ -261,12 +261,13 @@ resources:
               params:
                 "%domain%": { get_param: domain }
           db:
-            name: { get_param: database_name }
+            database: { get_param: database_name }
             user: { get_param: username }
-            pass: { get_attr: [database_password, value] }
+            password: { get_attr: [database_password, value] }
             host: "127.0.0.1"
-          admin: { get_param: username }
-          pass: { get_attr: [database_password, value] }
+          site:
+            admin: { get_param: username }
+            pass: { get_attr: [database_password, value] }
         rax:
           firewall:
             tcp: [80]
