@@ -224,6 +224,7 @@ resources:
         run_list: ["recipe[apt]",
                    "recipe[rax-drupal-dir]",
                    "recipe[drupal]",
+                   "recipe[dotmy-cnf]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
                    "recipe[hollandbackup::main]",
