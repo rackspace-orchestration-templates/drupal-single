@@ -1,9 +1,6 @@
 #
-# Author:: Marius Ducea (marius@promethost.com)
 # Cookbook Name:: drupal
-# Recipe:: cron
-#
-# Copyright 2010, Promet Solutions
+# Recipe:: firewall
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +15,19 @@
 # limitations under the License.
 #
 
-include_recipe "cron"
+include_recipe "firewall"
+include_recipe "drupal"
 
-cron "drupal hourly cron" do
-    command "cd #{node['drupal']['dir']}; /usr/bin/php cron.php"
-    minute "0"
-    only_if  { File.exist?("#{node['drupal']['dir']}/cron.php") }
+firewall_rule "http" do
+  port node['drupal']['firewall']['http']
+  protocol :tcp
+  interface node['drupal']['firewall']['interface']
+  action :allow
+end
+
+firewall_rule "https" do
+  port node['drupal']['firewall']['https']
+  protocol :tcp
+  interface node['drupal']['firewall']['interface']
+  action :allow
 end
