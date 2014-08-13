@@ -21,7 +21,6 @@ parameter_groups:
   - kitchen
   - chef_version
   - version
-  - prefix
 
 parameters:
 
@@ -97,17 +96,6 @@ parameters:
       - "6.33"
 
   # Database and system user configuration
-  prefix:
-    label: Database Prefix
-    description: Prefix to use for Drupal database tables
-    type: string
-    default: drupal_
-    constraints:
-    - allowed_pattern: "^[0-9a-zA-Z$_]{0,10}$"
-      description: |
-        Prefix must be shorter than 10 characters, and can only include
-        letters, numbers, $, and/or underscores.
-
   database_name:
     label: Database Name
     description: Drupal database name
