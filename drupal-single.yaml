@@ -12,6 +12,7 @@ parameter_groups:
 
 - label: Drupal Settings
   parameters:
+  - version
   - domain
   - username
 
@@ -21,7 +22,6 @@ parameter_groups:
   - database_name
   - kitchen
   - chef_version
-  - version
 
 parameters:
 
