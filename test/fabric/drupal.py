@@ -1,12 +1,20 @@
-from fabric.api import env, run, task
-from envassert import detect, file, group, package, port, process, service, \
-    user
+import re
+from fabric.api import env, run, task, hide
+from envassert import detect, file, package, port, process, service
+
+
+def drupal_is_responding():
+    with hide('running', 'stdout'):
+        homepage = run('curl http://localhost/')
+    if re.search('Welcome to Drupal7', homepage):
+        return True
+    else:
+        return False
 
 
 @task
 def check():
     env.platform_family = detect.detect()
-    release = run("/usr/bin/lsb_release -r | awk {'print $2'}")
 
     assert package.installed("php5")
     assert package.installed("holland")
@@ -16,3 +24,4 @@ def check():
     assert process.is_up("mysql")
     assert service.is_enabled("apache2")
     assert service.is_enabled("mysql")
+    assert drupal_is_responding(), 'Drupal did not respond as expected.'
