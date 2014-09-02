@@ -5,7 +5,8 @@ from envassert import detect, file, package, port, process, service
 
 def drupal_is_responding():
     with hide('running', 'stdout'):
-        homepage = run('curl http://localhost/')
+        site = "http://localhost/"
+        homepage = run("wget --quiet --output-document - %s" % site)
     if re.search('Welcome to Drupal7', homepage):
         return True
     else:
