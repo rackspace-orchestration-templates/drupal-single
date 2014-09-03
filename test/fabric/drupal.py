@@ -17,12 +17,29 @@ def drupal_is_responding():
 def check():
     env.platform_family = detect.detect()
 
-    assert package.installed("php5")
-    assert package.installed("holland")
     assert file.is_dir("/var/www/vhosts")
     assert port.is_listening(80)
-    assert process.is_up("apache2")
-    assert process.is_up("mysql")
-    assert service.is_enabled("apache2")
-    assert service.is_enabled("mysql")
+    assert package.installed("holland")
     assert drupal_is_responding(), 'Drupal did not respond as expected.'
+
+    apache_process = 'apache2'
+    php_package = 'php5'
+    mysql_process = 'mysql'
+
+    if env.platform_family == 'debian':
+        apache_process = 'apache2'
+        php_package = 'php5'
+        mysql_process = 'mysql'
+    elif env.platform_family == 'rhel':
+        apache_process = 'httpd'
+        php_package = 'php'
+        mysql_process = 'mysqld'
+    else:
+        raise ValueError('OS ' + env.platform_family +
+                         ' unknown, update tests.')
+
+    assert package.installed(php_package)
+    assert process.is_up(apache_process)
+    assert process.is_up(mysql_process)
+    assert service.is_enabled(apache_process)
+    assert service.is_enabled(mysql_process)
