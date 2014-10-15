@@ -22,10 +22,9 @@ test-cases:
             use_ssh_config: True
             fabfile: test/fabric/drupal.py # Path to envassert test
 
-- name: Standard Instance, Ubuntu 12.04
+- name: Ubuntu 12.04
   create:
     parameters:
-      flavor: 2GB Standard Instance
       image: Ubuntu 12.04 LTS (Precise Pangolin)
     timeout: 30
   resource_tests:
@@ -46,11 +45,10 @@ test-cases:
             use_ssh_config: True
             fabfile: test/fabric/drupal.py
 
-- name: Standard Instance, Ubuntu 14.04
+- name: Ubuntu 14.04
   create:
     parameters:
-      flavor: 2GB Standard Instance
-      image: Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM) 
+      image: Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
     timeout: 30
   resource_tests:
     ssh_private_key: { get_output: private_key }
@@ -70,10 +68,9 @@ test-cases:
             use_ssh_config: True
             fabfile: test/fabric/drupal.py
 
-- name: Standard Instance, Debian 7
+- name: Debian 7
   create:
     parameters:
-      flavor: 2GB Standard Instance
       image: Debian 7 (Wheezy) (PVHVM)
     timeout: 30
   resource_tests:
@@ -94,10 +91,9 @@ test-cases:
             use_ssh_config: True
             fabfile: test/fabric/drupal.py
 
-- name: Standard Instance, CentOS 6
+- name: CentOS 6
   create:
     parameters:
-      flavor: 2GB Standard Instance
       image: CentOS 6.5 (PVHVM)
     timeout: 30
   resource_tests:
