@@ -94,10 +94,10 @@ parameters:
     label: Drupal Version
     description: Version of Drupal to install
     type: string
-    default: "7.31"
+    default: "7.32"
     constraints:
     - allowed_values:
-      - "7.31"
+      - "7.32"
 
   # Database and system user configuration
   database_name:
@@ -132,7 +132,7 @@ parameters:
     label: Chef Version
     description: Version of chef client to use
     type: string
-    default: 11.14.2
+    default: 11.16.4
 
 resources:
   # Random password generation
