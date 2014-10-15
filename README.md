@@ -33,7 +33,7 @@ the `-P` flag to specify a custom parameter.
 * `domain`: Domain to be used with the Drupal site (Default: example.com)
 * `image`: Required: Server image used for all servers that are created as a
   part of this deployment. (Default: Ubuntu 12.04 LTS (Precise Pangolin))
-* `version`: Version of Drupal to install (Default: 7.31)
+* `version`: Version of Drupal to install (Default: 7.32)
 * `database_name`: Drupal database name (Default: drupal)
 * `flavor`: Required: Rackspace Cloud Server flavor to use. The size is based
   on the amount of RAM for the provisioned server. (Default: 4 GB Performance)
