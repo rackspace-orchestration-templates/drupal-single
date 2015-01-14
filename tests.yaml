@@ -94,7 +94,7 @@ test-cases:
 - name: CentOS 6
   create:
     parameters:
-      image: CentOS 6.5 (PVHVM)
+      image: CentOS 6 (PVHVM)
     timeout: 30
   resource_tests:
     ssh_private_key: { get_output: private_key }
