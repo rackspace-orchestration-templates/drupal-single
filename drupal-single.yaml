@@ -52,7 +52,7 @@ parameters:
       - Debian 7 (Wheezy) (PVHVM)
       - Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
       - CentOS 6 (PVHVM)
-      - Red Hat Enterprise Linux 6.6 (PVHVM)
+      - Red Hat Enterprise Linux 6 (PVHVM)
       description: Must be a supported operating system.
 
   flavor:
