@@ -1,7 +1,7 @@
 import re
 from fabric.api import env, run, task, hide
 from envassert import detect, file, package, port, process, service
-
+from hot.utils.test import get_artifacts, http_check
 
 def drupal_is_responding():
     with hide('running', 'stdout'):
@@ -43,3 +43,9 @@ def check():
     assert process.is_up(mysql_process)
     assert service.is_enabled(apache_process)
     assert service.is_enabled(mysql_process)
+
+
+@task
+def artifacts():
+    env.platform_family = detect.detect()
+    get_artifacts()
