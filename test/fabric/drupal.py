@@ -1,7 +1,8 @@
 import re
 from fabric.api import env, run, task, hide
 from envassert import detect, file, package, port, process, service
-from hot.utils.test import get_artifacts, http_check
+from hot.utils.test import get_artifacts
+
 
 def drupal_is_responding():
     with hide('running', 'stdout'):
