@@ -1,7 +1,137 @@
 mysql Cookbook CHANGELOG
 ========================
-This file is used to list changes made in each version of the mysql cookbook.
 
+v6.0.13 (2015-02-15)
+--------------------
+- Adding support for special characters in initial_root_password
+- Fixing failure status bug in sysvinit script
+
+v6.0.12 (2015-02-30)
+--------------------
+- No changes. Released a 6.0.11 that was identical to 6.0.10.
+  Git before coffee.
+
+v6.0.11 (2015-02-30)
+--------------------
+- Adding support for configurable socket files
+
+v6.0.10 (2015-01-19)
+------------------
+- Fix #282 - Fixing up data_dir template variable
+
+v6.0.9 (2015-01-19)
+------------------
+- Fix #282 - undefined method `parsed_data_dir' bug
+
+v6.0.8 (2015-01-19)
+------------------
+- Refactoring helper methods out of resource classes
+
+v6.0.7 (2015-01-14)
+------------------
+- Fixing timing issue with Upstart provider :restart and :reload
+  actions where service returns before being available
+
+v6.0.6 (2014-12-26)
+------------------
+- Fixing subtle bug where MysqlCookbook::Helper methods were polluting Chef::Resource
+
+v6.0.5 (2014-12-25)
+------------------
+- Using 'include_recipe' instead of 'recipe_eval' in LWRP
+- Fixing type checking on package_name attribute in mysql_client resource.
+
+v6.0.4 (2014-12-21)
+------------------
+- Suggest available versions if current is not available for current platform.
+
+v6.0.3 (2014-12-17)
+------------------
+- Adding bind_address parameter to mysql_service resource
+
+v6.0.2 (2014-12-17)
+------------------
+- Fixing sysvinit provider to survive reboots
+
+v6.0.1 (2014-12-16)
+------------------
+- Fixing Upstart template to survive reboots
+
+v6.0.0 (2014-12-15)
+------------------
+- Major version update
+- Cookbook now provides LWRPs instead of recipes
+- Platform providers re-factored into init system providers
+- Separated :create and :start actions for use in recipes that build containers
+- mysql_service now supports multiple instances on the same machine
+- mysql_service no longer attempts to manage user records
+- Removal of debian-sys-maint
+- Unified Sysvinit script that works on all platforms
+- mysql_config resource introduced
+- mysql_client fixed up
+- Refactored acceptance tests
+- Temporarily dropped FreeBSD support
+
+v5.6.1 (2014-10-29)
+------------------
+- Use Gem::Version instead of Chef::Version
+
+v5.6.0 (2014-10-29)
+------------------
+- Changing default charset to utf8
+- Quoting passwords in debian.cnf.erb
+- Amazon 2014.09 support
+- Ubuntu 14.10 support
+- Only hide passwords from STDOUT via "sensitive true" in chef-client higher than 11.14
+- Updating test harness
+
+v5.5.4 (2014-10-07)
+------------------
+- Adding sensitive flag to execute resources to protect passwords from logs  
+
+v5.5.3 (2014-09-24)
+------------------
+- Reverting back to Upstart on Ubuntu 14.04
+
+v5.5.2 (2014-09-8)
+------------------
+- Reverting commit that broke Debian pass_string
+
+v5.5.1 (2014-09-2)
+------------------
+- Switching Ubuntu service provider to use SysVinit instead of Upstart
+
+v5.5.0 (2014-08-27)
+-------------------
+- Adding package version and action parameters to mysql_service resource
+- Fixing Debian pass_string
+
+v5.4.4 (2014-08-27)
+-------------------
+- Changing module namespace to MysqlCookbook
+
+v5.4.3 (2014-08-25)
+-------------------
+- More refactoring. Moving helper function bits into resource parsed_parameters
+
+v5.4.2 (2014-08-25)
+-------------------
+- Moving provider local variables into definitions for RHEL provider
+
+v5.4.1 (2014-08-25)
+-------------------
+- Refactoring resources into the LWRP style with parsed parameters
+- Moving provider local variables into definitions
+
+v5.4.0 (2014-08-25)
+-------------------
+- #212 - support for centos-7 (mysql55 and mysql56)
+- Adding (untested) Debian-6 support
+- Adding Suse support to metadata.rb
+- Adding ability to change MySQL root password
+- Added libmysqlclient-devel package to SuSE client provider
+- Appeasing AppArmor
+- Reducing duplication in client provider
 
 v5.3.6 (2014-06-18)
 -------------------

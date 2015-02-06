@@ -1,6 +1,14 @@
 yum-mysql-community Cookbook CHANGELOG
 ======================
-This file is used to list changes made in each version of the yum-centos cookbook.
+This file is used to list changes made in each version of the yum-mysql-community cookbook.
+
+v0.1.12 (2015-01-20)
+-------------------
+- Minor style updates
+
+v0.1.11 (2014-07-21)
+-------------------
+- Adding RHEL-7 support
 
 v0.1.10 (2014-07-21)
 -------------------
@@ -9,7 +17,6 @@ v0.1.10 (2014-07-21)
 v0.1.8 (2014-06-18)
 -------------------
 - Updating to support real RHEL
-
 
 v0.1.6 (2014-06-16)
 -------------------

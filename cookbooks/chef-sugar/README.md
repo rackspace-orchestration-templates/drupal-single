@@ -4,13 +4,11 @@ Chef::Sugar
 [![Build Status](http://img.shields.io/travis/sethvargo/chef-sugar.svg)][travis]
 [![Dependency Status](http://img.shields.io/gemnasium/sethvargo/chef-sugar.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/sethvargo/chef-sugar.svg)][codeclimate]
-[![Gittip](http://img.shields.io/gittip/sethvargo.svg)][gittip]
 
 [gem]: https://rubygems.org/gems/chef-sugar
 [travis]: http://travis-ci.org/sethvargo/chef-suguar
 [gemnasium]: https://gemnasium.com/sethvargo/chef-sugar
 [codeclimate]: https://codeclimate.com/github/sethvargo/chef-sugar
-[gittip]: https://www.gittip.com/sethvargo
 
 Chef Sugar is a Gem & Chef Recipe that includes series of helpful sugar of the Chef core and other resources to make a cleaner, more lean recipe DSL, enforce DRY principles, and make writing Chef recipes an awesome experience!
 
@@ -141,7 +139,8 @@ require 'chef/sugar/core_extensions'
 
 ### Data Bag
 - `encrypted_data_bag_item` - a handy DSL method for loading encrypted data bag items the same way you load a regular data bag item; this requires `Chef::Config[:encrypted_data_bag_secret]` is set!
-- `encrypted_data_bag_item_for_environment` - find the data bag entry for the current node's Chef environment.
+- `encrypted_data_bag_item_for_environment` - find the encrypted data bag entry for the current node's Chef environment.
+- `data_bag_item_for_environment` - find the data bag entry for the current node's Chef environment.
 
 #### Examples
 ```ruby
@@ -150,6 +149,22 @@ encrypted_data_bag_item('accounts', 'hipchat')
 
 ```ruby
 encrypted_data_bag_item_for_environment('accounts', 'github')
+```
+
+```ruby
+data_bag_item_for_environment('accounts', 'github')
+```
+
+### Docker
+Chef Sugar looks for hints to see if the node being converged is a Docker container. When [Ohai supports checking other nodes](https://github.com/opscode/ohai/pull/428), Chef Sugar will automatically pick up the information.
+
+- `docker?`
+
+#### Examples
+```ruby
+template '/runme' do
+  only_if { docker?(node) }
+end
 ```
 
 ### Attributes
@@ -248,13 +263,16 @@ end
 ```
 
 ### Node
+
+Additional methods for the `node` object
+
 - `deep_fetch` - safely fetch a nested attribute.
 - `deep_fetch!` - fetch a nested attribute, raising a more semantic error if the key does not exist.
 - `in?` - determine if the node is in the given Chef environment.
 
 #### Examples
 ```ruby
-credentials = if in?('production')
+credentials = if node.in?('production')
                 Chef::EncryptedDataBag.new('...')
               else
                 data_bag('...')
@@ -273,6 +291,10 @@ node.deep_fetch('apache2', 'config', 'root') => node['apache2']['config']['root'
 - `redhat_enterprise_linux?`
 - `scientific_linux?`
 - `ubuntu?`
+- `solaris2?`
+- `aix?`
+- `smartos?`
+- `omnios?`
 
 There are also a series of dynamically defined matchers that map named operating system release versions and comparison operators in the form "#{platform}\_#{operator}\_#{name}?". For example:
 
@@ -371,6 +393,20 @@ log "Skipping git install, version is at #{version_for('mongo', '-v')}"
 ```ruby
 http_request 'http://...' do
   not_if { vagrant? }
+end
+```
+
+### Virtualization
+- `kvm?`
+- `lxc?`
+- `virtualbox?`
+- `vmware?`
+
+#### Examples
+```ruby
+service 'ntpd' do
+  action [:enable, :start]
+  not_if { lxc? }
 end
 ```
 
