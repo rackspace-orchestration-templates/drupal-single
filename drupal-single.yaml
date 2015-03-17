@@ -228,6 +228,7 @@ resources:
                    "recipe[rax-drupal-dir]",
                    "recipe[drupal]",
                    "recipe[dotmy-cnf]",
+                   "recipe[patch-drupalconf]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
                    "recipe[hollandbackup::main]",
