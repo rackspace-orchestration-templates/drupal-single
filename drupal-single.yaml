@@ -94,10 +94,11 @@ parameters:
     label: Drupal Version
     description: Version of Drupal to install
     type: string
-    default: "7.35"
+    default: "7"
     constraints:
-    - allowed_values:
-      - "7.35"
+    - allowed_pattern: '^7(\.?[0-9-a-zA-Z-])*$'
+      description: |
+        Must be a valid 7.x release.
 
   # Database and system user configuration
   database_name:
