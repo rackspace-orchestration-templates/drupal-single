@@ -2,7 +2,7 @@
 # Cookbook Name:: chef-sugar
 # Recipe:: default
 #
-# Copyright 2013-2014, Seth Vargo <sethvargo@gmail.com>
+# Copyright 2013-2015, Seth Vargo <sethvargo@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 # limitations under the License.
 #
 
+gem_version = run_context.cookbook_collection[cookbook_name].metadata.version
+
 chef_gem('chef-sugar') do
-  version '2.0.0'
+  version gem_version
   action  :nothing
 end.run_action(:install)
 
