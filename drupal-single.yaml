@@ -118,6 +118,16 @@ parameters:
         username length.
 
 resources:
+
+  wait_condition:
+    type: OS::Heat::SwiftSignal
+    properties:
+      handle: { get_resource: wait_condition_handle }
+      timeout: 1800
+
+  wait_condition_handle:
+    type: OS::Heat::SwiftSignalHandle
+
   # Random password generation
   database_password:
     type: "OS::Heat::RandomString"
