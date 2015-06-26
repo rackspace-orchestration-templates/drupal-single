@@ -8,7 +8,7 @@ def check():
     env.platform_family = detect.detect()
 
     site = "http://localhost/"
-    string = "Powered by Drupal"
+    string = "example.com"
     apache_process = 'apache2'
     php_package = 'php5'
     mysql_process = 'mysql'
