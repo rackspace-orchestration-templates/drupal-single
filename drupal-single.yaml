@@ -20,8 +20,6 @@ parameter_groups:
   - version
   - server_hostname
   - database_name
-  - kitchen
-  - chef_version
 
 parameters:
 
@@ -45,14 +43,10 @@ parameters:
       Required: Server image used for all servers that are created as a part of
       this deployment.
     type: string
-    default: Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)
+    default: Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
     constraints:
     - allowed_values:
-      - Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)
-      - Debian 7 (Wheezy) (PVHVM)
-#      - Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
-      - CentOS 6 (PVHVM)
-      - Red Hat Enterprise Linux 6 (PVHVM)
+      - Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
       description: Must be a supported operating system.
 
   flavor:
@@ -122,18 +116,6 @@ parameters:
       description: |
         Must be shorter than 16 characters, this is due to MySQL's maximum
         username length.
-
-  kitchen:
-    label: Kitchen URL
-    description: "URL for a git repo containing required cookbooks"
-    type: string
-    default: https://github.com/rackspace-orchestration-templates/drupal-single.git
-
-  chef_version:
-    label: Chef Version
-    description: Version of chef client to use
-    type: string
-    default: 11.16.4
 
 resources:
   # Random password generation
