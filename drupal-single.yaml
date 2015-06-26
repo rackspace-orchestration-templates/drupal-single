@@ -17,7 +17,6 @@ parameter_groups:
 
 - label: rax-dev-params
   parameters:
-  - version
   - server_hostname
   - database_name
 
