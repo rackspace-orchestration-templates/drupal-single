@@ -184,6 +184,8 @@ resources:
                     '*':
                       - salt-minion
                       - apache
+                      - composer
+                      - drush
                       - drupal
                       - mysql
                       - mysql.database
