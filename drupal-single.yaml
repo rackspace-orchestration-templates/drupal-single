@@ -186,12 +186,12 @@ resources:
                       - apache
                       - composer
                       - drush
-                      - drupal
                       - mysql
                       - mysql.database
                       - mysql.user
                       - mysql.grant
                       - php
+                      - drupal
             # Example Pillar Data using %value% notation
             # See example pillar data from states repository.
               - path: /srv/pillar/localhost.sls
