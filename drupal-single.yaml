@@ -192,6 +192,8 @@ resources:
                       - mysql.grant
                       - php
                       - drupal
+                      - holland
+                      - holland.mysqldump
             # Example Pillar Data using %value% notation
             # See example pillar data from states repository.
               - path: /srv/pillar/localhost.sls
@@ -209,6 +211,24 @@ resources:
                     db_name: %database_name%
                     db_user: drupal_user
                     db_pass: %database_password%
+                  holland:
+                    backupsets:
+                      default:
+                        "holland:backup":
+                          plugin: mysqldump
+                          backups-to-keep: 7
+                          auto-purge-failures: yes
+                          purge-policy: after-backup
+                          estimated-size-factor: 1.0
+                        mysqldump:
+                          file-per-database: yes
+                        compression:
+                          method: gzip
+                          inline: yes
+                          level: 1
+                        "mysql:client":
+                          user: root
+                          password: %mysql_root_password%
                   mysql:
                     root_password: %mysql_root_password%
                   mysql-database:
