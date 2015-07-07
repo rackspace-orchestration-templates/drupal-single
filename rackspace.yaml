@@ -21,43 +21,36 @@ abstract: |
 instructions: |
   #### Getting Started
   If you're new to Drupal, check out [Getting started with Drupal 7
-  administration](https://drupal.org/getting-started/7/admin) or [Getting
-  started with Drupal 6
-  administration](https://drupal.org/getting-started/6/admin).  The getting
+  administration](https://drupal.org/getting-started/7/admin). The getting
   started document will help guide you through the initial steps of checking
-  your site's status, customizing your site's informaion, adding users, and
+  your site's status, customizing your site's information, adding users, and
   more!
 
   #### Logging in via SSH
   The private key provided in the passwords section can be used to login as
-  root via SSH.  We have an article on how to use these keys with [Mac OS X and
+  root via SSH. We have an article on how to use these keys with [Mac OS X and
   Linux](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-linuxmac)
   as well as [Windows using
   PuTTY](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-windows).
 
   #### Details of Your Setup
-  This deployment was stood up using
-  [chef-solo](http://docs.opscode.com/chef_solo.html). Once the deployment is
-  up, chef will not run again, so it is safe to modify configurations.
+  This deployment was stood up using [salt](http://saltstack.com/). Once the
+  deployment is up, salt will not run again, so it is safe to modify
+  configurations.
 
-  A system user called 'drupal' has been created as a part of this deployment.
-  There is no password associated with this account. You will need to set a
-  password for this user if you'd like to use the account for transferring
-  content, backups, or other purposes. Since the account has no password, no
-  one will be able to login as this user until a password is set.
-
-  Drupal was installed using [Drush](http://drush.ws/about). Drupal is
-  installed into /var/www/drupal and served by
+  Drupal was installed using [Drush](http://www.drush.org/en/master/). Drupal
+  is installed into /var/www/<YOUR DOMAIN> and served by
   [Apache](http://httpd.apache.org/). The Apache configuration is in
-  /etc/apache2/sites-enabled/drupal.conf. Any changes to the configuration
-  would require a restart of Apache.
+  /etc/apache2/sites-enabled/<YOUR DOMAIN>.conf. Any changes to the
+  configuration would require a restart of Apache.
 
   [MySQL](http://www.mysql.com/) is the database backend used in this
   deployment. The MySQL root password is included in the password section of
   this deployment. If you do lose the password, it is also available in
   /root/.my.cnf. MySQL backups are performed locally by
   [Holland](http://wiki.hollandbackup.org/). The backups will be stored in
-  /var/lib/mysqlbackup.
+  /var/spool/holland. Daily backups will be performed, and only the last seven
+  backups will be kept.
 
   #### Updating Drupal
   Drupal does provide community documentation on [how to
