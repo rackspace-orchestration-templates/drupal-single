@@ -1,7 +1,12 @@
 heat_template_version: 2013-05-23
 
 description: |
-  This is a Heat template to deploy a single Linux server running Drupal.
+  #### Single Server
+
+  Linux server with [Drupal](https://drupal.org/) installed with
+  [Apache](http://httpd.apache.org/) and [MySQL 5.5](http://www.mysql.com/).
+  This deployment is intended for simple test cases and low traffic scenarios.
+  It is not for high traffic events and is not easily scalable.
 
 parameter_groups:
 
