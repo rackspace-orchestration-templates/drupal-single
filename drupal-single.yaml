@@ -318,7 +318,7 @@ outputs:
       str_replace:
         template: "http://%ip%"
         params:
-          "%ip%": { get_attr: [drupal_server, accessIPv4] }
+          "%ip%": { get_attr: [load_balancer, PublicIp] }
 
   drupal_user:
     description: Drupal User
