@@ -4,7 +4,8 @@ description: |
   #### Single Server
 
   Linux server with [Drupal](https://drupal.org/) installed with
-  [Apache](http://httpd.apache.org/) and [MySQL 5.5](http://www.mysql.com/).
+  [Apache](http://httpd.apache.org/) and [MySQL 5.5](http://www.mysql.com/),
+  behind a Cloud Load Balancer.
   This deployment is intended for simple test cases and low traffic scenarios.
   It is not for high traffic events and is not easily scalable.
 
@@ -278,10 +279,34 @@ resources:
             "%username%": { get_param: username }
             "%database_name%": { get_param: database_name }
 
+  load_balancer:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      name:
+        str_replace:
+          template: stack-lb
+          params:
+            stack: { get_param: "OS::stack_name" }
+      port: 80
+      virtualIps:
+      - ipVersion: IPV4
+        type: PUBLIC
+      protocol: HTTP
+      contentCaching: ENABLED
+      nodes:
+      - addresses: [ { get_attr: [ drupal_server, networks, private, 0] } ]
+        port: 80
+      metadata:
+        rax-heat: { get_param: "OS::stack_id" }
+
 outputs:
   private_key:
     description: SSH Private Key
     value: { get_attr: [ssh_key, private_key] }
+
+  loadbalancer_ip:
+    description: Load Balancer IP
+    value: { get_attr: [load_balancer, PublicIp] }
 
   server_ip:
     description: Server IP
@@ -293,7 +318,7 @@ outputs:
       str_replace:
         template: "http://%ip%"
         params:
-          "%ip%": { get_attr: [drupal_server, accessIPv4] }
+          "%ip%": { get_attr: [load_balancer, PublicIp] }
 
   drupal_user:
     description: Drupal User
